@@ -10,6 +10,10 @@ class CommentForm extends React.Component {
 		}
 	}
 	
+	handleSubmit(){
+		console.log(this.state.author + ' said ' + this.state.text);
+	}
+	
 	render(){
 		return (
 			<form style={style.commentForm} onSubmit={this.handleSubmit.bind(this)}>

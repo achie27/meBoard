@@ -52,26 +52,27 @@ router.get('/', (req, res) => {
 //     })
 // });
 
-// router.route('/comments')
-//     .get((req, res)=>{
-//         Comment.find((err, comments) => {
-//             if(err){
-//                 res.send(err);
-//             }
-//             res.json(comments);
-//         })
-//     })
-//     .post((req, res)=>{
-//         var comment = new Comment();
-//         comment.author = req.body.author;
-//         comment.text = req.body.text;
+router.route('/comments')
+    .get((req, res)=>{
+        Comment.find((err, comments) => {
+            if(err){
+                res.send(err);
+            }
+            res.json(comments);
+        })
+    })
+    .post((req, res)=>{
+        var comment = new Comment();
+        comment.author = req.body.author;
+        comment.text = req.body.text;
         
-//         comment.save((err)=>{
-//             if(err)
-//                 res.send(err);
-//             res.json({message : 'added!'});
-//         })
-//     })
+        comment.save((err)=>{
+            if(err){
+                res.send(err);
+            }
+            res.json({message : 'added!'});
+        })
+    })
 
 app.use('/api', router);
 
