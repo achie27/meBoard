@@ -68,11 +68,40 @@ router.route('/comments')
         
         comment.save((err)=>{
             if(err){
-                res.send(err);
+                res.send(err);o
             }
             res.json({message : 'added!'});
         })
+    });
+    
+router.route('/comments/:comment_id')
+    .put((req, res) => {
+        Comment.findById(req.param.comment_id, (err, comment) => {
+        	if(err){
+        		res.send(err);
+        	} 
+        	(req.body.author) ? comment.author = req.body.author : null;
+        	(req.body.text) ? comment.text = req.body.text : null;
+        	
+        	comment.save((err) => {
+        		if(err){
+        			res.send(err);
+        		}
+        		res.json({message : 'updated!'});
+        	});
+        });
     })
+    .delete((req, res) => {
+    	Comment.remove({ _id : req.param.comment_id}, (err, comment) => {
+    		if(err){
+    			console.error(err);
+    			res.send(err);
+    		}
+    		res.send(JSON.stringify(comment));
+    		res.json({message : 'deleted!'});
+    	});
+    })
+    
 
 app.use('/api', router);
 

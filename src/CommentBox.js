@@ -22,7 +22,17 @@ class CommentBox extends React.Component {
     }
     
     submitComment(comment){
+    	let comments = this.state.data;
+    	comment.id = Date.now();
     	
+    	let newComments = comments.concat([comment]);
+    	this.setState({data : newComments});
+    	
+    	axios.post(this.props.url, comment)
+    	.catch(err => {
+    		console.error(err);
+    		this.setState({data : comments});
+    	});
     }
     
     render() {
@@ -37,6 +47,7 @@ class CommentBox extends React.Component {
     
     componentDidMount(){
     	this.loadComments();
+    	setInterval(this.loadComments, this.props.pollInterval)
     }
 }
 
