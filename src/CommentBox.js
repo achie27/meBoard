@@ -21,6 +21,14 @@ class CommentBox extends React.Component {
 		})
     }
     
+    onUpdate(){
+    	console.log(this);
+    }
+    
+    onDelete(){
+    	console.log(this);	
+    }
+    
     submitComment(comment){
     	let comments = this.state.data;
     	comment.id = Date.now();
@@ -39,8 +47,11 @@ class CommentBox extends React.Component {
         return (
 	        <div style={style.commentBox}>
 				<h2>Comments:</h2>
-				<CommentList data={this.state.data}/>
-				<CommentForm onCommentSubmit={this.submitComment}/>
+				<CommentList data={this.state.data}
+					onUpdate={this.onUpdate}
+					onDelete={this.onDelete}
+				/>
+				<CommentForm onCommentSubmit={this.submitComment.bind(this)}/>
 	        </div>
         );
     }

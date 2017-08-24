@@ -23,7 +23,6 @@ class CommentForm extends React.Component {
 			text : text
 		});
 		this.setState({author : '', text : ''});
-		console.log(this.state.author + ' said ' + this.state.text);
 	}
 	
 	authorChange(e){

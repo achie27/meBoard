@@ -6,7 +6,10 @@ class CommentList extends React.Component {
 	render(){
 		let comments = this.props.data.map((ele) => {
 			return (
-				<Comment author={ele.author} key={ele['_id']}>
+				<Comment author={ele.author} key={ele['_id']} id={ele['_id']} 
+					onUpdate={this.props.onUpdate}
+					onDelete={this.props.onDelete}
+				>
 					{ele.text}
 				</Comment>
 			);

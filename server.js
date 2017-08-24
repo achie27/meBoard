@@ -68,15 +68,15 @@ router.route('/comments')
         
         comment.save((err)=>{
             if(err){
-                res.send(err);o
+                res.send(err);
             }
             res.json({message : 'added!'});
         })
     });
     
-router.route('/comments/:comment_id')
+router.route('/comments/:commentID')
     .put((req, res) => {
-        Comment.findById(req.param.comment_id, (err, comment) => {
+        Comment.findById(req.params.commentID, (err, comment) => {
         	if(err){
         		res.send(err);
         	} 
@@ -92,13 +92,11 @@ router.route('/comments/:comment_id')
         });
     })
     .delete((req, res) => {
-    	Comment.remove({ _id : req.param.comment_id}, (err, comment) => {
+    	Comment.remove({ _id : req.params.commentID}, (err, comment) => {
     		if(err){
-    			console.error(err);
     			res.send(err);
     		}
-    		res.send(JSON.stringify(comment));
-    		res.json({message : 'deleted!'});
+    		res.send('deleted');
     	});
     })
     
