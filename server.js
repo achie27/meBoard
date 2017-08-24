@@ -8,7 +8,7 @@ const Comment = require('./model/comments');
 var app = express();
 var router = express.Router();
 
-var port = 8080;
+const port = 8080;
 
 const mongo = 'mongodb://lol:nope@ds151163.mlab.com:51163/storemedaddy';
 mongoose.connect(mongo, {useMongoClient : true});
@@ -96,7 +96,7 @@ router.route('/comments/:commentID')
     		if(err){
     			res.send(err);
     		}
-    		res.send('deleted');
+    		console.log('deleted');
     	});
     })
     

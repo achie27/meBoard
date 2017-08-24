@@ -21,12 +21,18 @@ class CommentBox extends React.Component {
 		})
     }
     
-    onUpdate(){
-    	console.log(this);
+    onCommentUpdate(id, comment){
+    	axios.put(`${this.props.url}/${id}`, comment)
+		.catch(err => {
+			console.error(err);
+		});
     }
     
-    onDelete(){
-    	console.log(this);	
+    onCommentDelete(id){
+    	axios.delete(`${this.props.url}/${id}`)
+    	.catch(err => {
+    		console.error(err);
+    	});
     }
     
     submitComment(comment){
@@ -48,8 +54,8 @@ class CommentBox extends React.Component {
 	        <div style={style.commentBox}>
 				<h2>Comments:</h2>
 				<CommentList data={this.state.data}
-					onUpdate={this.onUpdate}
-					onDelete={this.onDelete}
+					onUpdate={this.onCommentUpdate.bind(this)}
+					onDelete={this.onCommentDelete.bind(this)}
 				/>
 				<CommentForm onCommentSubmit={this.submitComment.bind(this)}/>
 	        </div>
